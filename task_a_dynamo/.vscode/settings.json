@@ -1,0 +1,11 @@
+{
+  "serverlessConsole.services": [
+    {
+      "type": "dynamodb",
+      "title": "ub-EspressoDrinks",
+      "tableName": "ub-EspressoDrinks",
+      "awsProfile": "default",
+      "region": "ap-northeast-2"
+    }
+  ]
+}
