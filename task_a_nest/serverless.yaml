@@ -1,0 +1,66 @@
+service: task-a-nest
+
+# org: yubeom
+
+# app: task-a
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-warmup
+  - serverless-offline
+
+package:
+  individually: true
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
+
+provider:
+  name: aws
+  region: ap-northeast-2
+  stage: dev
+  runtime: nodejs20.x
+
+functions:
+  main:
+    handler: src/lambda.handler
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /users
+          method: any
+      - http:
+          path: /posts
+          method: any
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    postsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: postsTable
+        AttributeDefinitions:
+          - AttributeName: _id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: _id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

@@ -19,27 +19,11 @@ export const main = async () => {
         AttributeName: "_id",
         AttributeType: "N",
       },
-      {
-        AttributeName: "serviceName",
-        AttributeType: "S",
-      },
-      {
-        AttributeName: "serviceMonthlyPrice",
-        AttributeType: "N",
-      },
-      {
-        AttributeName: "serviceStatus",
-        AttributeType: "B",
-      },
     ],
     KeySchema: [
       {
         AttributeName: "_id",
         KeyType: "HASH",
-      },
-      {
-        AttributeName: "serviceName",
-        KeyType: "RANGE",
       },
     ],
     ProvisionedThroughput: {
